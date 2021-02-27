@@ -1,0 +1,46 @@
+@PACKAGE_INIT@
+
+find_package(OpenSSL REQUIRED)
+
+add_library(LiveMedia::UsageEnvironment STATIC IMPORTED)
+target_include_directories(LiveMedia::UsageEnvironment INTERFACE
+  "@PACKAGE_INSTALL_INCLUDEDIR@/UsageEnvironment"
+)
+set_property(TARGET LiveMedia::UsageEnvironment PROPERTY
+  IMPORTED_LOCATION "@PACKAGE_INSTALL_LIBDIR@/libUsageEnvironment.a"
+)
+
+add_library(LiveMedia::BasicUsageEnvironment STATIC IMPORTED)
+target_include_directories(LiveMedia::BasicUsageEnvironment INTERFACE
+  "@PACKAGE_INSTALL_INCLUDEDIR@/BasicUsageEnvironment"
+)
+set_property(TARGET LiveMedia::BasicUsageEnvironment PROPERTY
+  IMPORTED_LOCATION "@PACKAGE_INSTALL_LIBDIR@/libBasicUsageEnvironment.a"
+)
+target_link_libraries(LiveMedia::BasicUsageEnvironment INTERFACE
+  LiveMedia::UsageEnvironment
+)
+
+add_library(LiveMedia::Groupsock STATIC IMPORTED)
+target_include_directories(LiveMedia::Groupsock INTERFACE
+  "@PACKAGE_INSTALL_INCLUDEDIR@/Groupsock"
+)
+set_property(TARGET LiveMedia::Groupsock PROPERTY
+  IMPORTED_LOCATION "@PACKAGE_INSTALL_LIBDIR@/libgroupsock.a"
+)
+target_link_libraries(LiveMedia::Groupsock INTERFACE
+  LiveMedia::UsageEnvironment
+)
+
+add_library(LiveMedia::LiveMedia STATIC IMPORTED)
+target_include_directories(LiveMedia::LiveMedia INTERFACE
+  "@PACKAGE_INSTALL_INCLUDEDIR@/liveMedia"
+)
+set_property(TARGET LiveMedia::LiveMedia PROPERTY
+  IMPORTED_LOCATION "@PACKAGE_INSTALL_LIBDIR@/libliveMedia.a"
+)
+target_link_libraries(LiveMedia::LiveMedia INTERFACE
+  LiveMedia::Groupsock
+  LiveMedia::UsageEnvironment
+  OpenSSL::SSL
+)
