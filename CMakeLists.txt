@@ -42,3 +42,6 @@ install(FILES
   ${CMAKE_CURRENT_BINARY_DIR}/LiveMediaConfigVersion.cmake
   DESTINATION ${INSTALL_DATADIR}
 )
+
+set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Alok Priyadarshi")
+include(CPack)

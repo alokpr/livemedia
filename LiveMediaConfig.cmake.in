@@ -23,7 +23,7 @@ target_link_libraries(LiveMedia::BasicUsageEnvironment INTERFACE
 
 add_library(LiveMedia::Groupsock STATIC IMPORTED)
 target_include_directories(LiveMedia::Groupsock INTERFACE
-  "@PACKAGE_INSTALL_INCLUDEDIR@/Groupsock"
+  "@PACKAGE_INSTALL_INCLUDEDIR@/groupsock"
 )
 set_property(TARGET LiveMedia::Groupsock PROPERTY
   IMPORTED_LOCATION "@PACKAGE_INSTALL_LIBDIR@/libgroupsock.a"
